@@ -14,37 +14,45 @@
             <form action="/" method="post">
                 {% csrf_token %}
                 {{ form.non_field_errors }}
-
-                <p class="always">Would you like to buy or sell {{ currency_plural }}?</p>
-                {{ form.tx_type.errors }}
-                {% for choice in form.tx_type %}
-                    <label for="{{ choice.id_for_label }}" class="tx_type_choice_radio">
-                        {{ choice.choice_label }}<br />
-                        {{ choice.tag }}
-                    </label>
-                {% endfor %}
-
-                <p class="buy">There are currently {{ buy_amount }} {{ currency_plural }} for sale</p>
-                <p class="buy">How many would you like to buy?</p>
-                {{ form.amount.errors }}
-                {{ form.amount.label_tag }}
-                {{ form.amount }}
-
-                <p class="buy">Please enter a valid {{ currency_code }} address for the purchased {{ currency_plural }} to be sent to:</p>
-                {{ form.address.errors }}
-                {{ form.address.label_tag }}
-                {{ form.address }}
-
-                <p class="buy">Please choose the payment processor you would like to handle your purchase:</p>
-                {% for choice in form.payment_processor %}
-                    <label for="{{ choice.id_for_label }}" class="payment_processor_choice_radio">
-                        {{ choice.choice_label }}<br />
-                        {{ choice.tag }}
-                    </label>
-                {% endfor %}
-
-                <br />
-                <input type="submit" value="Submit" />
+                <div class="col-md-12 col-md-offset-2">
+                    <p class="always">Would you like to buy or sell {{ currency_plural }}?</p>
+                    {{ form.tx_type.errors }}
+                    {% for choice in form.tx_type %}
+                        <label for="{{ choice.id_for_label }}" class="tx_type_choice_radio">
+                            {{ choice.choice_label }}<br />
+                            {{ choice.tag }}
+                        </label>
+                    {% endfor %}
+                </div>
+                <div class="col-md-12 col-md-offset-2">
+                    <div class="buy sell">
+                        <p class="buy">There are currently {{ buy_amount }} {{ currency_plural }} for sale</p>
+                        <p class="buy">How many would you like to buy?</p>
+                        <p class="sell">How many would you like to sell?</p>
+                        {{ form.amount.errors }}
+                        {{ form.amount.label_tag }}
+                        {{ form.amount }}
+                    </div>
+                </div>
+                <div class="col-md-12 col-md-offset-2">
+                    <div class="buy">
+                        <p class="buy">Please enter a valid {{ currency_code }} address for the purchased {{ currency_plural }} to be sent to:</p>
+                        {{ form.address.errors }}
+                        {{ form.address.label_tag }}
+                        {{ form.address }}
+                    </div>
+                </div>
+                <div class="col-md-12 col-md-offset-2">
+                    <p class="buy sell">Please choose the payment processor you would like to handle your purchase:</p>
+                    {% for choice in form.payment_processor %}
+                        <label for="{{ choice.id_for_label }}" class="buy sell payment_processor_choice_radio">
+                            {{ choice.choice_label }}<br />
+                            {{ choice.tag }}
+                        </label>
+                    {% endfor %}
+                    <br />
+                    <input type="submit" value="Submit" class="buy sell" />
+                </div>
             </form>
         </div>
     </div>
